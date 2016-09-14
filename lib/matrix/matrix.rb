@@ -16,8 +16,8 @@ class Matrix
         times = matrix_a[i][k] / matrix_a[k][k].to_f
         for j in (k .. @cols - 1)
           matrix_a[i][j] = matrix_a[i][j] - times * matrix_a[k][j].to_f
-          matrix_b[i][j] = matrix_b[i][j] - times * matrix_b[k][j].to_f if j < matrix_b[i].count
         end
+        matrix_b[i].each_with_index{|row, col| matrix_b[i][col] = matrix_b[i][col] - times * matrix_b[k][col]}
       end
     end
     [matrix_a, matrix_b]
