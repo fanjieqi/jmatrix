@@ -23,4 +23,9 @@ class Matrix
     [matrix_a, matrix_b]
   end
 
+  def determinant
+    matrix = gaussian_elimination[0]
+    matrix.each.with_index.inject(1){|ans, (row,i)| ans *= row[i]}
+  end
+
 end
