@@ -27,12 +27,10 @@ class JMatrix
     matrix_a = @matrix_a.clone rescue nil
     matrix_b = @matrix_b.clone rescue nil
     matrix_a.each_with_index do |row, k|
-      matrix_a[k + 1 .. @rows - 1].each_with_index do |cur_row, i|
+      matrix_a.drop(k + 1).each_with_index do |cur_row, i|
         times = cur_row[k] / row[k].to_f
-        for j in (k .. @cols - 1)
-          cur_row[j] = cur_row[j] - times * row[j].to_f
-        end
-        matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]}
+        cur_row.drop(k).each_with_index{|ele, j| ele -= times * row[j].to_f}
+        matrix_b[i].each.with_index{|ele, j| ele -= times * matrix_b[k][j]}
       end
     end
     [matrix_a, matrix_b]
