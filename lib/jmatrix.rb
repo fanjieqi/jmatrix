@@ -44,8 +44,3 @@ class JMatrix
   end
 
 end
-
-
-# p Matrix.new([[1,2,3],[3,2,4],[4,5,6]], [6,7,8]).gaussian_elimination
-# # p Matrix.new([[1,2,3],[3,2,4],[4,5,6]], [6,7,8]).gaussian_elimination2
-
