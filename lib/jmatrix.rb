@@ -17,7 +17,7 @@ class JMatrix
         for j in (k .. @cols - 1)
           matrix_a[i][j] = matrix_a[i][j] - times * matrix_a[k][j].to_f
         end
-        matrix_b[i].each_with_index{|row, col| matrix_b[i][col] = matrix_b[i][col] - times * matrix_b[k][col]} if @matrix_b
+        matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]}
       end
     end
     [matrix_a, matrix_b]
