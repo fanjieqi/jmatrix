@@ -28,11 +28,11 @@ class JMatrix
     matrix_b = @matrix_b.clone rescue nil
     matrix_a.each_with_index do |row, k|
       matrix_a[k + 1 .. @rows - 1].each_with_index do |cur_row, i|
-        times = cur_row[k] / matrix_a[k][k].to_f
+        times = cur_row[k] / row[k].to_f
         for j in (k .. @cols - 1)
-          cur_row[j] = cur_row[j] - times * matrix_a[k][j].to_f
+          cur_row[j] = cur_row[j] - times * row[j].to_f
         end
-        matrix_b[i].each_with_index{|row, col| matrix_b[i][col] = matrix_b[i][col] - times * matrix_b[k][col]}
+        matrix_b[i] = matrix_b[i].map.with_index{|ele, col| ele - times * matrix_b[k][col]}
       end
     end
     [matrix_a, matrix_b]
