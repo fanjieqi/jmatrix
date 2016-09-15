@@ -23,19 +23,6 @@ class JMatrix
     [matrix_a, matrix_b]
   end
 
-  def gaussian_elimination2
-    matrix_a = @matrix_a.clone rescue nil
-    matrix_b = @matrix_b.clone rescue nil
-    matrix_a.each_with_index do |row, k|
-      matrix_a.drop(k + 1).each_with_index do |cur_row, i|
-        times = cur_row[k] / row[k].to_f
-        cur_row.drop(k).each_with_index{|ele, j| ele -= times * row[j].to_f}
-        matrix_b[i].each.with_index{|ele, j| ele -= times * matrix_b[k][j]}
-      end
-    end
-    [matrix_a, matrix_b]
-  end
-
   def gauss_jordan_elimination
     matrix_a, matrix_b = gaussian_elimination
     for k in (@rows - 1).downto(1)
