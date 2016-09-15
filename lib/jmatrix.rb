@@ -32,7 +32,7 @@ class JMatrix
         for j in (k .. @cols - 1)
           cur_row[j] = cur_row[j] - times * row[j].to_f
         end
-        matrix_b[i] = matrix_b[i].map.with_index{|ele, col| ele - times * matrix_b[k][col]}
+        matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]}
       end
     end
     [matrix_a, matrix_b]
