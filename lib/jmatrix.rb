@@ -6,6 +6,7 @@ class JMatrix
     @rows = @matrix_a.count
     @cols = @matrix_a[0].count
     @matrix_b.map!{|row| [row]} if @matrix_b && !@matrix_b[0].is_a?(Array) && @rows > 1
+    @identity = @rows.times.map{|row, l| [0]*@rows;}.map.with_index{|row, l| row[l]=1;row}
   end
 
   def gaussian_elimination
