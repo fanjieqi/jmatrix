@@ -55,4 +55,8 @@ class JMatrix
     matrix.each.with_index.inject(1){|ans, (row,i)| ans *= row[i]}
   end
 
+  def inverse
+    gauss_jordan_elimination[1]
+  end
+
 end
