@@ -38,6 +38,20 @@ class JMatrix
     [matrix_a, matrix_b]
   end
 
+  def gauss_jordan_elimination
+    matrix_a, matrix_b = gaussian_elimination
+    for k in (@rows - 1).downto(1)
+      matrix_b[k].map!{|ele| ele / matrix_a[k][k]}
+      matrix_a[k][k] = 1
+      for i in (0 .. k - 1)
+        times = matrix_a[i][k] / matrix_a[k][k].to_f
+        matrix_a[i][k] = matrix_a[i][k] - times * matrix_a[k][k]
+        matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]}
+      end
+    end
+    [matrix_a, matrix_b]
+  end
+
   def determinant
     matrix = gaussian_elimination[0]
     matrix.each.with_index.inject(1){|ans, (row,i)| ans *= row[i]}
