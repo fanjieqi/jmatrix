@@ -24,4 +24,15 @@ describe JMatrix do
     end
   end
 
+  case3 = [[1,2,3],[2,5,7],[3,5,3]]
+  expected3 = [[1,0,0],[2,1,0],[3,-1,1]]
+  describe ".lu_decomposition" do
+    context "given #{case3}" do
+      it "returns #{expected3}" do
+        @matrix = JMatrix.new(case3[0], case3[1])
+        expect(@matrix.lu_decomposition).to eq expected3
+      end
+    end
+  end
+
 end
