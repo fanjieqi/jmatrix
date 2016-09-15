@@ -5,7 +5,7 @@ class JMatrix
     @matrix_b = matrix_b
     @rows = @matrix_a.count
     @cols = @matrix_a[0].count
-    @matrix_b.map!{|row| [row]} if !@matrix_b[0].is_a?(Array) && @rows > 1
+    @matrix_b.map!{|row| [row]} if @matrix_b && !@matrix_b[0].is_a?(Array) && @rows > 1
   end
 
   def gaussian_elimination
@@ -17,7 +17,7 @@ class JMatrix
         for j in (k .. @cols - 1)
           matrix_a[i][j] = matrix_a[i][j] - times * matrix_a[k][j].to_f
         end
-        matrix_b[i].each_with_index{|row, col| matrix_b[i][col] = matrix_b[i][col] - times * matrix_b[k][col]}
+        matrix_b[i].each_with_index{|row, col| matrix_b[i][col] = matrix_b[i][col] - times * matrix_b[k][col]} if @matrix_b
       end
     end
     [matrix_a, matrix_b]
