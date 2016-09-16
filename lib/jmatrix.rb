@@ -1,4 +1,6 @@
+require "jmatrix/helper"
 class JMatrix
+  include JMatrixHelper
 
   def initialize(matrix_a = nil, matrix_b = nil)
     @matrix_a = matrix_a
@@ -15,6 +17,7 @@ class JMatrix
     for k in (0 .. @rows - 1)
       for i in (k + 1 .. @rows - 1)
         times = matrix_a[i][k] / matrix_a[k][k].to_f
+        yield k, i, times rescue nil
         for j in (k .. @cols - 1)
           matrix_a[i][j] = matrix_a[i][j] - times * matrix_a[k][j]
         end
@@ -36,6 +39,16 @@ class JMatrix
       end
     end
     [matrix_a, matrix_b]
+  end
+
+  def lu_decomposition
+    @matrix_ls = (@rows-1).times.map{|row| Marshal.load(Marshal.dump(@identity)) }
+    gaussian_elimination{|k, i, times| @matrix_ls[k][i][k] = times }
+    ans = @matrix_ls[0]
+    (@matrix_ls.count - 1).times do |k|
+      ans = multiply(ans, @matrix_ls[k+1])
+    end
+    ans
   end
 
   def determinant
