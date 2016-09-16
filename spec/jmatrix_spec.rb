@@ -35,4 +35,16 @@ describe JMatrix do
     end
   end
 
+  case4 = [[1,1,-1,2],[-1,-1,-4,1],[2,4,-6,1],[1,2,4,2]]
+  expected4 = 57
+  describe ".determinant" do
+    context "given #{case4}" do
+      it "returns #{expected4}" do
+        @matrix = JMatrix.new(case4)
+        expect(@matrix.determinant).to eq expected4
+      end
+    end
+  end
+
+
 end
