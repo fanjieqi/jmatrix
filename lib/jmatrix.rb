@@ -4,7 +4,7 @@ class JMatrix
     @matrix_a = matrix_a
     @matrix_b = matrix_b
     @rows = @matrix_a.count
-    @cols = @matrix_a[0].count
+    @cols = @matrix_a[0].count rescue nil
     @matrix_b.map!{|row| [row]} if @matrix_b && !@matrix_b[0].is_a?(Array) && @rows > 1
     @identity = @rows.times.map{|row, l| [0]*@rows;}.map.with_index{|row, l| row[l]=1;row}
   end
@@ -18,7 +18,7 @@ class JMatrix
         for j in (k .. @cols - 1)
           matrix_a[i][j] = matrix_a[i][j] - times * matrix_a[k][j]
         end
-        matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]}
+        matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]} rescue nil
       end
     end
     [matrix_a, matrix_b]
