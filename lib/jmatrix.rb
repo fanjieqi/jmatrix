@@ -1,6 +1,5 @@
 require "jmatrix/helper"
 class JMatrix
-  include JMatrixHelper
   PRECISION = 0.0000000001
 
   def initialize(matrix_a = nil, matrix_b = nil)
@@ -49,7 +48,7 @@ class JMatrix
     @matrix_ls = (@rows-1).times.map{|row| Marshal.load(Marshal.dump(@identity)) }
     gaussian_elimination{|k, i, times| @matrix_ls[k][i][k] = times }
     ans = @matrix_ls[0]
-    @matrix_ls.drop(1).inject(ans){|ans, matrix| ans = multiply(ans, matrix) }
+    @matrix_ls.drop(1).inject(ans){|ans, matrix| ans = ans.multiply( matrix) }
   end
 
   def determinant
