@@ -13,8 +13,8 @@ class JMatrix
   end
 
   def gaussian_elimination
-    matrix_a = @matrix_a.clone rescue nil
-    matrix_b = @matrix_b.clone rescue nil
+    matrix_a = Marshal.load(Marshal.dump(@matrix_a)) rescue nil
+    matrix_b = Marshal.load(Marshal.dump(@matrix_b)) rescue nil
     for k in (0 .. @rows - 1)
       for i in (k + 1 .. @rows - 1)
 
