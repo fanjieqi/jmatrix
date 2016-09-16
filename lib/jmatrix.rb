@@ -32,7 +32,7 @@ class JMatrix
 
   def gauss_jordan_elimination
     matrix_a, matrix_b = gaussian_elimination
-    for k in (@rows - 1).downto(1)
+    for k in (@rows - 1).downto(0)
       matrix_b[k].map!{|ele| ele / matrix_a[k][k]} rescue nil
       matrix_a[k][k] = 1
       for i in (0 .. k - 1)
