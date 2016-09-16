@@ -1,6 +1,7 @@
 require "jmatrix/helper"
 class JMatrix
   include JMatrixHelper
+  PRECISION = 0.0000000001
 
   def initialize(matrix_a = nil, matrix_b = nil)
     @matrix_a = matrix_a
@@ -18,9 +19,9 @@ class JMatrix
       for i in (k + 1 .. @rows - 1)
 
         #change the rows when matrix[k][k].zero?
-        if matrix_a[k][k].abs <= 0.0000000001
+        if matrix_a[k][k].abs <= PRECISION
           (@rows - 1).downto(k + 1) do |l|
-            if matrix_a[k][l].abs >= 0.0000000001
+            if matrix_a[k][l].abs >= PRECISION
               matrix_a[k], matrix_a[l] = matrix_a[l], matrix_a[k]
               matrix_b[k], matrix_b[l] = matrix_b[l], matrix_b[k] rescue nil
               @matrix_c[k], @matrix_c[l] = @matrix_c[l], @matrix_c[k] rescue nil

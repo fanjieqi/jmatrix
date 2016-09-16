@@ -35,13 +35,25 @@ describe JMatrix do
     end
   end
 
-  case4 = [[1,1,-1,2],[-1,-1,-4,1],[2,4,-6,1],[1,2,4,2]]
-  expected4 = 57
+  case4 = [
+    [[1,1,-1,2],[-1,-1,-4,1],[2,4,-6,1],[1,2,4,2]],
+    [[1,4,-1,4],[2,1,4,3],[4,2,3,11],[3,0,9,2]],
+  ]
+  expected4 = [
+    57,
+    10,
+  ]
   describe ".determinant" do
-    context "given #{case4}" do
-      it "returns #{expected4}" do
-        @matrix = JMatrix.new(case4)
-        expect(@matrix.determinant).to eq expected4
+    context "given #{case4[0]}" do
+      it "returns #{expected4[0]}" do
+        @matrix = JMatrix.new(case4[0])
+        expect(@matrix.determinant).to eq expected4[0]
+      end
+    end
+    context "given #{case4[1]}" do
+      it "returns #{expected4[1]}" do
+        @matrix = JMatrix.new(case4[1])
+        expect( (@matrix.determinant - expected4[1]).abs ).to be <= JMatrix::PRECISION
       end
     end
   end
