@@ -37,7 +37,7 @@ class JMatrix
       matrix_a[k][k] = 1
       for i in (0 .. k - 1)
         times = matrix_a[i][k] / matrix_a[k][k].to_f
-        matrix_a[i][k] = matrix_a[i][k] - times * matrix_a[k][k]
+        matrix_a[i][k] -= times * matrix_a[k][k]
         matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]} rescue nil
       end
     end
