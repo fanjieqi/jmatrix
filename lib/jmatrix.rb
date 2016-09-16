@@ -56,8 +56,7 @@ class JMatrix
   end
 
   def determinant
-    matrix = gaussian_elimination[0]
-    matrix.each.with_index.inject(1){|ans, (row,i)| ans *= row[i]}
+    gaussian_elimination[0].map.with_index{|row,i| row[i]}.inject(:*)
   end
 
   def inverse
