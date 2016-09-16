@@ -56,6 +56,7 @@ class JMatrix
   end
 
   def inverse
+    @matrix_b ||= Marshal.load(Marshal.dump(@identity))
     gauss_jordan_elimination[1]
   end
 
