@@ -46,9 +46,10 @@ class JMatrix
 
   def lu_decomposition
     @matrix_ls = (@rows-1).times.map{|row| Marshal.load(Marshal.dump(@identity)) }
-    gaussian_elimination{|k, i, times| @matrix_ls[k][i][k] = times }
+    matrix_u = gaussian_elimination{|k, i, times| @matrix_ls[k][i][k] = times }[0]
     ans = @matrix_ls[0]
-    @matrix_ls.drop(1).inject(ans){|ans, matrix| ans = ans.multiply( matrix) }
+    matrix_l = @matrix_ls.drop(1).inject(ans){|ans, matrix| ans = ans.multiply( matrix) }
+    [matrix_l, matrix_u]
   end
 
   def determinant
