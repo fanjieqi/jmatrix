@@ -18,16 +18,7 @@ class JMatrix
     for k in (0 .. @rows - 1)
       for i in (k + 1 .. @rows - 1)
 
-        #change the rows when matrix[k][k].zero?
-        if matrix_a[k][k].abs <= PRECISION
-          (@rows - 1).downto(k + 1) do |l|
-            if matrix_a[k][l].abs >= PRECISION
-              matrix_a[k], matrix_a[l] = matrix_a[l], matrix_a[k]
-              matrix_b[k], matrix_b[l] = matrix_b[l], matrix_b[k] rescue nil
-              @matrix_c[k], @matrix_c[l] = @matrix_c[l], @matrix_c[k] rescue nil
-            end
-          end
-        end
+        change_rows(matrix_a, matrix_b, k)
 
         times = matrix_a[i][k] / matrix_a[k][k].to_f
         yield k, i, times rescue nil
@@ -71,6 +62,20 @@ class JMatrix
 
   def inverse
     gauss_jordan_elimination[1]
+  end
+
+  private
+  def change_rows(matrix_a, matrix_b, k)
+    #change the rows when matrix[k][k].zero?
+    if matrix_a[k][k].abs <= PRECISION
+      (@rows - 1).downto(k + 1) do |l|
+        if matrix_a[k][l].abs >= PRECISION
+          matrix_a[k], matrix_a[l] = matrix_a[l], matrix_a[k]
+          matrix_b[k], matrix_b[l] = matrix_b[l], matrix_b[k] rescue nil
+          @matrix_c[k], @matrix_c[l] = @matrix_c[l], @matrix_c[k] rescue nil
+        end
+      end
+    end
   end
 
 end
