@@ -53,7 +53,7 @@ describe JMatrix do
     context "given #{case4[1]}" do
       it "returns #{expected4[1]}" do
         @matrix = JMatrix.new(case4[1])
-        expect( (@matrix.determinant - expected4[1]).abs ).to be <= JMatrix::PRECISION
+        expect( @matrix.determinant.round(9) ).to eq expected4[1]
       end
     end
   end
