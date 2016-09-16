@@ -23,7 +23,7 @@ class JMatrix
         times = matrix_a[i][k] / matrix_a[k][k].to_f
         yield k, i, times rescue nil
         for j in (k .. @cols - 1)
-          matrix_a[i][j] = matrix_a[i][j] - times * matrix_a[k][j]
+          matrix_a[i][j] -= times * matrix_a[k][j]
         end
         matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]} rescue nil
       end
