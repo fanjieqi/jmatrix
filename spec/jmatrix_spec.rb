@@ -58,8 +58,8 @@ describe JMatrix do
     end
   end
 
-  case6 = [[-2,1],[4,-3]]
-  expected6 = [[1,0],[0,1]]
+  case5 = [[-2,1],[4,-3]]
+  expected5 = [[1,0],[0,1]]
   describe ".inverse" do
     context "given #{case2[0]}" do
       it "returns #{case2[1]}" do
@@ -68,10 +68,10 @@ describe JMatrix do
       end
     end
 
-    context "given #{case6}" do
-      it "returns #{expected6}" do
-        @matrix = JMatrix.new(case6)
-        expect( case6.multiply(@matrix.inverse).round_value ).to eq(expected6)
+    context "given #{case5}" do
+      it "returns #{expected5}" do
+        @matrix = JMatrix.new(case5)
+        expect( case5.multiply(@matrix.inverse).round_value ).to eq(expected5)
       end
     end
   end
