@@ -58,14 +58,13 @@ describe JMatrix do
     end
   end
 
-  expected5 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
   case6 = [[-2,1],[4,-3]]
   expected6 = [[1,0],[0,1]]
   describe ".inverse" do
-    context "given #{case2}" do
-      it "returns #{expected5}" do
+    context "given #{case2[0]}" do
+      it "returns #{case2[1]}" do
         @matrix = JMatrix.new(case2[0])
-        expect( case2[0].multiply(@matrix.inverse).round_value ).to eq(expected5)
+        expect( case2[0].multiply(@matrix.inverse).round_value ).to eq(case2[1])
       end
     end
 
