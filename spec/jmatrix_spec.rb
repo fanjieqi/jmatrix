@@ -29,7 +29,7 @@ describe JMatrix do
   describe ".lu_decomposition" do
     context "given #{case3}" do
       it "returns #{expected3}" do
-        @matrix = JMatrix.new(case3[0], case3[1])
+        @matrix = JMatrix.new(case3)
         expect(@matrix.lu_decomposition).to eq expected3
       end
     end
