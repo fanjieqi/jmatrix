@@ -49,10 +49,7 @@ class JMatrix
     @matrix_ls = (@rows-1).times.map{|row| Marshal.load(Marshal.dump(@identity)) }
     gaussian_elimination{|k, i, times| @matrix_ls[k][i][k] = times }
     ans = @matrix_ls[0]
-    (@matrix_ls.count - 1).times do |k|
-      ans = multiply(ans, @matrix_ls[k+1])
-    end
-    ans
+    @matrix_ls.drop(1).inject(ans){|ans, matrix| ans = multiply(ans, matrix) }
   end
 
   def determinant
