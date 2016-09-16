@@ -25,12 +25,14 @@ describe JMatrix do
   end
 
   case3 = [[1,2,3],[2,5,7],[3,5,3]]
-  expected3 = [[1,0,0],[2,1,0],[3,-1,1]]
+  expected3 = [[[1,0,0],[2,1,0],[3,-1,1]], [[1, 2, 3],[0,1,1],[0,0,-5]]]
   describe ".lu_decomposition" do
     context "given #{case3}" do
       it "returns #{expected3}" do
         @matrix = JMatrix.new(case3)
-        expect(@matrix.lu_decomposition).to eq expected3
+        matrix_l, matrix_u = @matrix.lu_decomposition
+        expect( matrix_l ).to eq expected3[0]
+        expect( matrix_u ).to eq expected3[1]
       end
     end
   end
