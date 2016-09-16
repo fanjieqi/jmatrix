@@ -15,3 +15,15 @@ module JMatrixHelper
   end
 
 end
+
+class Array
+  include JMatrixHelper
+  def multiply(matrix)
+    super(self, matrix)
+  end
+
+  def round_value
+    self.map{|row| row.map{|ele| ele.round(9)}}
+  end
+
+end
