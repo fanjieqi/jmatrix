@@ -16,6 +16,18 @@ class JMatrix
     matrix_b = @matrix_b.clone rescue nil
     for k in (0 .. @rows - 1)
       for i in (k + 1 .. @rows - 1)
+
+        #change the rows when matrix[k][k].zero?
+        if matrix_a[k][k].abs <= 0.0000000001
+          (@rows - 1).downto(k + 1) do |l|
+            if matrix_a[k][l].abs >= 0.0000000001
+              matrix_a[k], matrix_a[l] = matrix_a[l], matrix_a[k]
+              matrix_b[k], matrix_b[l] = matrix_b[l], matrix_b[k] rescue nil
+              @matrix_c[k], @matrix_c[l] = @matrix_c[l], @matrix_c[k] rescue nil
+            end
+          end
+        end
+
         times = matrix_a[i][k] / matrix_a[k][k].to_f
         yield k, i, times rescue nil
         for j in (k .. @cols - 1)
