@@ -64,14 +64,14 @@ describe JMatrix do
     context "given #{case2[0]}" do
       it "returns #{case2[1]}" do
         @matrix = JMatrix.new(case2[0])
-        expect( case2[0].multiply(@matrix.inverse).round_value ).to eq(case2[1])
+        expect( case2[0].multiply(@matrix.inverse).round_value ).to eq case2[1]
       end
     end
 
     context "given #{case5}" do
       it "returns #{expected5}" do
         @matrix = JMatrix.new(case5)
-        expect( case5.multiply(@matrix.inverse).round_value ).to eq(expected5)
+        expect( case5.multiply(@matrix.inverse).round_value ).to eq expected5
       end
     end
   end
