@@ -78,4 +78,15 @@ describe JMatrix do
     end
   end
 
+  case6 = [[1,2,2,2],[2,4,6,8],[3,6,8,10]]
+  expected6 = [[1,2,0,-2],[0,0,1,2],[0,0,0,0]]
+  describe ".reduced_row_echelon_form" do
+    context "given #{case6}" do
+      it "returns #{expected6}" do
+        @matrix = JMatrix.new(case6)
+        expect( @matrix.rref ).to eq expected6
+      end
+    end
+  end
+
 end
