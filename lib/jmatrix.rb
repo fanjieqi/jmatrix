@@ -20,6 +20,7 @@ class JMatrix
         change_rows(matrix_a, matrix_b, k)
         l = k
         l += 1 while matrix_a[k][l] == 0 && l < @cols
+        next if l == @cols
 
         times = matrix_a[i][l] / matrix_a[k][l].to_f
         yield l, i, times rescue nil
@@ -38,6 +39,7 @@ class JMatrix
       next if matrix_a[k].all?{|ele| ele.zero? }
       l = k
       l += 1 while matrix_a[k][l] == 0 && l < @cols
+      next if l == @cols
       matrix_b[k].map!{|ele| ele / matrix_a[k][l]} rescue nil
 
       times = matrix_a[k][l]
