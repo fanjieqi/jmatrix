@@ -86,7 +86,7 @@ describe JMatrix do
       it "returns #{expected6_2}" do
         @matrix = JMatrix.new(case6)
         expect( @matrix.gaussian_elimination[0] ).to eq expected6_1
-        # expect( @matrix.rref ).to eq expected6_2
+        expect( @matrix.rref ).to eq expected6_2
       end
     end
   end
