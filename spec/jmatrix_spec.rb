@@ -102,7 +102,7 @@ describe JMatrix do
   end
 
   expected6_3 = [[-2,2],[0,-2],[1,0],[0,1]]
-  expected7_3 = [[1],[1],[-1]]
+  expected7_3 = [[-1],[-1],[1]]
   describe ".null" do
     context "given #{case6}" do
       it "returns #{expected6_3}" do
