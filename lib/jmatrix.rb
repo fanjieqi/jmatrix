@@ -84,18 +84,15 @@ class JMatrix
   def null
     matrix_r = reduced_row_echelon_form
     matrix_n = []
-    f = -1
-    col = -1
+    f = 0
     @rows.times do |row|
-      col = [row, col + 1].max
-      next if matrix_r[row][col] == 1
-      while (col < @cols) && (matrix_r[row][col] - 1).abs > PRECISION 
-        f += 1
+      next if matrix_r[row][row + f] == 1
+      while (row + f < @cols) && (matrix_r[row][row + f] - 1).abs > PRECISION 
         row.times do |i|
           matrix_n[i]   ||= []
-          matrix_n[i][f]  = -matrix_r[i][col]
+          matrix_n[i][f]  = -matrix_r[i][row + f]
         end
-        col += 1
+        f += 1
       end
     end
 
