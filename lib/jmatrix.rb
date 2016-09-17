@@ -35,11 +35,19 @@ class JMatrix
   def gauss_jordan_elimination
     matrix_a, matrix_b = gaussian_elimination
     for k in (@rows - 1).downto(0)
-      matrix_b[k].map!{|ele| ele / matrix_a[k][k]} rescue nil
-      matrix_a[k][k] = 1
+      next if matrix_a[k].all?{|ele| ele.zero? }
+      l = k
+      l += 1 while matrix_a[k][l] == 0 && l < @cols
+      matrix_b[k].map!{|ele| ele / matrix_a[k][l]} rescue nil
+
+      times = matrix_a[k][l]
+      matrix_a[k].map!{|ele| ele / times } rescue nil
       for i in (0 .. k - 1)
-        times = matrix_a[i][k] / matrix_a[k][k].to_f
-        matrix_a[i][k] -= times * matrix_a[k][k]
+        times = matrix_a[i][l] / matrix_a[k][l].to_f
+        for j in (l .. @cols - 1)
+          matrix_a[i][j] -= times * matrix_a[k][j]
+        end
+        # matrix_a[i].map!.with_index{|ele, col| ele - times * matrix_a[k][col]}
         matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]} rescue nil
       end
     end
