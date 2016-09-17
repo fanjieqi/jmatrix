@@ -71,6 +71,14 @@ class JMatrix
     gauss_jordan_elimination[1]
   end
 
+  def reduced_row_echelon_form
+    gauss_jordan_elimination[0]
+  end
+
+  def rref
+    reduced_row_echelon_form
+  end
+
   private
   def change_rows(matrix_a, matrix_b, k)
     #change the rows when matrix[k][k].zero?
