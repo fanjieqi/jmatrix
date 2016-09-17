@@ -87,7 +87,7 @@ class JMatrix
     f = 0
     @rows.times do |row|
       next if matrix_r[row][row + f] == 1
-      while (row + f < @cols) && (matrix_r[row][row + f] - 1).abs > PRECISION 
+      while (row + f < @cols) && (matrix_r[row][row + f] != 1)
         row.times do |i|
           matrix_n[i]   ||= []
           matrix_n[i][f]  = -matrix_r[i][row + f]
