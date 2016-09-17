@@ -101,4 +101,21 @@ describe JMatrix do
     end
   end
 
+  expected6_3 = [[-2,2],[0,-2],[1,0],[0,1]]
+  expected7_3 = [[1],[1],[-1]]
+  describe ".null" do
+    context "given #{case6}" do
+      it "returns #{expected6_3}" do
+        @matrix = JMatrix.new(case6)
+        expect( @matrix.null ).to eq expected6_3
+      end
+    end
+    context "given #{case7}" do
+      it "returns #{expected7_3}" do
+        @matrix = JMatrix.new(case7)
+        expect( @matrix.null ).to eq expected7_3
+      end
+    end
+  end  
+
 end
