@@ -107,8 +107,6 @@ class JMatrix
       end
     end
     matrix_n.map!{|row| row.map!(&:to_i) }
-
-    matrix_n
   end
 
   private
