@@ -81,6 +81,39 @@ class JMatrix
     reduced_row_echelon_form
   end
 
+  def null
+    matrix_r = reduced_row_echelon_form
+    matrix_n = []
+    f = -1
+    col = -1
+    @rows.times do |row|
+      col = [row, col + 1].max
+      next if matrix_r[row][col] == 1
+      while (col < @cols) && (matrix_r[row][col] - 1).abs > PRECISION 
+        f += 1
+        row.times do |i|
+          matrix_n[i]   ||= []
+          matrix_n[i][f]  = -matrix_r[i][col]
+        end
+        col += 1
+      end
+    end
+
+    n_row = matrix_n.count
+    n_col = matrix_n[0].count
+    (@cols - n_row).times do |row|
+      (0 .. row).each do |i|
+        (0 .. n_col - 1).each do |j|
+          matrix_n[n_row + i]   ||= []
+          matrix_n[n_row + i][j]  = i == j ? 1 : 0
+        end
+      end
+    end
+    matrix_n.map!{|row| row.map!(&:to_i) }
+
+    matrix_n
+  end
+
   private
   def change_rows(matrix_a, matrix_b, k)
     #change the rows when matrix[k][k].zero?
