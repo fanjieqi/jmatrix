@@ -18,10 +18,12 @@ class JMatrix
       for i in (k + 1 .. @rows - 1)
 
         change_rows(matrix_a, matrix_b, k)
+        l = k
+        l += 1 while matrix_a[k][l] == 0 && l < @cols
 
-        times = matrix_a[i][k] / matrix_a[k][k].to_f
-        yield k, i, times rescue nil
-        for j in (k .. @cols - 1)
+        times = matrix_a[i][l] / matrix_a[k][l].to_f
+        yield l, i, times rescue nil
+        for j in (l .. @cols - 1)
           matrix_a[i][j] -= times * matrix_a[k][j]
         end
         matrix_b[i].map!.with_index{|ele, col| ele - times * matrix_b[k][col]} rescue nil
