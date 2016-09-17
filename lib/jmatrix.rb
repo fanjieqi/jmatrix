@@ -84,7 +84,7 @@ class JMatrix
     #change the rows when matrix[k][k].zero?
     if matrix_a[k][k].abs <= PRECISION
       (@rows - 1).downto(k + 1) do |l|
-        if matrix_a[k][l].abs >= PRECISION
+        if matrix_a[l][k].abs >= PRECISION
           matrix_a[k], matrix_a[l] = matrix_a[l], matrix_a[k]
           matrix_b[k], matrix_b[l] = matrix_b[l], matrix_b[k] rescue nil
           @matrix_c[k], @matrix_c[l] = @matrix_c[l], @matrix_c[k] rescue nil
