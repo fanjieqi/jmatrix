@@ -99,14 +99,11 @@ class JMatrix
       end
     end
 
-    n_row = matrix_n.count
-    n_col = matrix_n[0].count
-    (@cols - n_row).times do |row|
-      (0 .. row).each do |i|
-        (0 .. n_col - 1).each do |j|
-          matrix_n[n_row + i]   ||= []
-          matrix_n[n_row + i][j]  = i == j ? 1 : 0
-        end
+    f_row = matrix_n.count
+    (0 .. @cols - f_row - 1).each do |i|
+      (0 .. matrix_n[0].count - 1).each do |j|
+        matrix_n[f_row + i]   ||= []
+        matrix_n[f_row + i][j]  = i == j ? 1 : 0
       end
     end
     matrix_n.map!{|row| row.map!(&:to_i) }
