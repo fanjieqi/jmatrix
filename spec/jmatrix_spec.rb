@@ -79,12 +79,14 @@ describe JMatrix do
   end
 
   case6 = [[1,2,2,2],[2,4,6,8],[3,6,8,10]]
-  expected6 = [[1,2,0,-2],[0,0,1,2],[0,0,0,0]]
+  expected6_1 = [[1,2,2,2],[0,0,2,4],[0,0,0,0]]
+  expected6_2 = [[1,2,0,-2],[0,0,1,2],[0,0,0,0]]
   describe ".reduced_row_echelon_form" do
     context "given #{case6}" do
-      it "returns #{expected6}" do
+      it "returns #{expected6_2}" do
         @matrix = JMatrix.new(case6)
-        expect( @matrix.rref ).to eq expected6
+        expect( @matrix.gaussian_elimination[0] ).to eq expected6_1
+        expect( @matrix.rref ).to eq expected6_2
       end
     end
   end
